@@ -1,4 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
+import { getRates } from "../../../api/queries";
 import {
   Title,
   Table,
@@ -8,25 +9,14 @@ import {
   HeadingCell,
 } from "./Rates.styles";
 
-type TRate = {
-  country: string;
-  currency: string;
-  code: string;
-  amount: number;
-  rate: number;
-};
+import { TRate } from "../../../api/Rates";
 
 export const Rates = () => {
   const today = new Date().toLocaleDateString();
 
   const { isLoading, error, data } = useQuery({
     queryKey: ["rates"],
-    queryFn: () =>
-      fetch("http://0.0.0.0:3000/rates", {
-        method: "GET",
-      }).then((res) => {
-        return res.json();
-      }),
+    queryFn: getRates,
   });
 
   return (

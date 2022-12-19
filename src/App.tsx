@@ -1,13 +1,23 @@
 import "./App.css";
-// import { Form } from "./components/Organisms/Form/Form";
+import { Form } from "./components/Organisms/Form/Form";
 import { Rates } from "./components/Organisms/Rates/Rates";
+import {
+  AppContainer,
+  AppSection,
+} from "./components/Templates/App/App.styles";
 
 function App() {
   return (
-    <div className="App">
-      <Rates />
-      {/* <Form title="Converter" /> */}
-    </div>
+    <>
+      <AppContainer>
+        <AppSection>
+          <Rates />
+        </AppSection>
+        <AppSection flexGrow={1} paddingLeft={"20px"}>
+          <Form title="Converter" />
+        </AppSection>
+      </AppContainer>
+    </>
   );
 }
 

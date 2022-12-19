@@ -7,7 +7,7 @@ export const Title = styled.h1`
 `;
 
 export const Table = styled.table`
-  margin: 2rem auto;
+  // margin: 2rem auto;
   border-collapse: collapse;
   font-size: 1.2rem;
   border: 1px solid #070c62;
