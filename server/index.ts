@@ -13,7 +13,6 @@ app.get("/rates", cors(), async (req: Request, res: Response) => {
     {
       method: "GET",
       cache: "no-cache",
-      credentials: "same-origin",
       headers: {
         "Content-Type": "text/plain",
       },
@@ -39,11 +38,9 @@ app.get("/rates", cors(), async (req: Request, res: Response) => {
     };
   });
 
-  //console.log(parsed);
-
   res.send({ data: parsed });
 });
 
 app.listen(port, () => {
-  console.log(`⚡️[server]: Server is running at https://localhost:${port}`);
+  console.log(`⚡️[server]: Server is running at http://localhost:${port}`);
 });
