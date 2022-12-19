@@ -23,6 +23,7 @@ export const AppSection = styled.section.attrs(
   flex-grow: ${(props) => props.flexGrow};
 
   @media (max-width: 768px) {
+    padding-top: 2rem;
     overflow: auto;
     flex-direction: column;
     padding-left: 0;

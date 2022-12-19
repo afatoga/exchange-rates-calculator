@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import { FormGroup, SubmitButton, Title } from "./Form.styles";
+import {
+  FormGroup,
+  SubmitButton,
+  Title,
+  ConversionResult,
+  ResultMessage,
+} from "./Form.styles";
 import { useQuery } from "@tanstack/react-query";
 import { getRates } from "../../../api/queries";
 import { TRate } from "../../../api/Rates";
@@ -9,27 +15,17 @@ type TProps = {
 };
 
 export const Form = (props: TProps) => {
-  const [amount, setAmount] = useState<number | "">("");
-  const [secondCurrency, setSecondCurrency] = useState<string>("");
+  const [amount, setAmount] = useState<number | "">(100);
+  const [secondCurrency, setSecondCurrency] = useState<string>("USD");
   const [conversionResult, setConversionResult] = useState<number | null>(null);
 
-  // const queryClient = new QueryClient({
-  //   defaultOptions: {
-  //     queries: {
-  //       staleTime: Infinity,
-  //     },
-  //   },
-  // })
-
-  const { isLoading, error, data } = useQuery({
+  const { data } = useQuery({
     queryKey: ["rates"],
     queryFn: getRates,
     enabled: amount !== 0,
   });
 
   const convert = () => {
-    //const data = await queryClient.ensureQueryData({queryKey: ['rates'], queryFn: getRates} )
-
     if (typeof amount !== "number" || amount <= 0)
       return alert("provide value bigger than 0");
     if (!secondCurrency.length) return alert("choose currency");
@@ -77,7 +73,11 @@ export const Form = (props: TProps) => {
 
         <FormGroup>
           <label htmlFor="currency">Currency</label>
-          <select id={"currency"} onChange={currencyHandler}>
+          <select
+            id={"currency"}
+            onChange={currencyHandler}
+            value={secondCurrency}
+          >
             <option value=""> - </option>
             {data?.data.map((item: TRate) => (
               <option key={item.code} value={item.code}>
@@ -90,10 +90,12 @@ export const Form = (props: TProps) => {
         <SubmitButton onClick={convert}>Convert</SubmitButton>
       </form>
       {conversionResult && (
-        <p>
-          Amount of {`${amount}`} CZK is {`${conversionResult.toFixed(4)}`}{" "}
-          {`${secondCurrency}`}
-        </p>
+        <ResultMessage>
+          Amount of {`${amount}`} CZK is{" "}
+          <ConversionResult>
+            {`${conversionResult.toFixed(4)}`} {`${secondCurrency}`}
+          </ConversionResult>
+        </ResultMessage>
       )}
     </>
   );

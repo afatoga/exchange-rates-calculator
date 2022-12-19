@@ -4,10 +4,10 @@ export const Title = styled.h1`
   font-size: 1.5em;
   text-align: center;
   color: palevioletred;
+  margin-bottom: 3rem;
 `;
 
 export const Table = styled.table`
-  // margin: 2rem auto;
   border-collapse: collapse;
   font-size: 1.2rem;
   border: 1px solid #070c62;
