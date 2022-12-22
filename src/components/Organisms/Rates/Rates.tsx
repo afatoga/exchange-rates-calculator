@@ -21,10 +21,10 @@ export const Rates = () => {
 
   return (
     <>
-      <Title>Exchange rates on {today}</Title>
+      <Title>CZK Exchange rates on {today}</Title>
       {error && "connection error"}
       {isLoading && "loading..."}
-      {data?.data.length && (
+      {data?.length && (
         <>
           <Table>
             <thead>
@@ -32,16 +32,18 @@ export const Rates = () => {
                 <HeadingCell>Country</HeadingCell>
                 <HeadingCell>Currency</HeadingCell>
                 <HeadingCell>Code</HeadingCell>
+                <HeadingCell align={"right"}>Amount</HeadingCell>
                 <HeadingCell align={"right"}>Rate</HeadingCell>
               </tr>
             </thead>
             <tbody>
-              {data.data.map((line: TRate) => {
+              {data.map((line: TRate) => {
                 return (
                   <TableLine key={line.code}>
                     <Cell>{line.country}</Cell>
                     <Cell>{line.currency}</Cell>
                     <Cell>{line.code}</Cell>
+                    <Cell align={"right"}>{line.amount}</Cell>
                     <RateCell>{line.rate}</RateCell>
                   </TableLine>
                 );

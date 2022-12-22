@@ -34,8 +34,10 @@ export const HeadingCell = styled.th.attrs((props) => ({
   background-color: #aaa;
 `;
 
-export const Cell = styled.td`
-  text-align: left;
+export const Cell = styled.td.attrs((props) => ({
+  align: props.align || "left",
+}))`
+  text-align: ${(props) => props.align};
   padding: 0.5rem 1rem;
   border-right: 1px solid #aaa;
 `;

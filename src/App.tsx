@@ -14,7 +14,7 @@ function App() {
           <Rates />
         </AppSection>
         <AppSection flexGrow={1} paddingLeft={"20px"}>
-          <Form title="Converter" />
+          <Form title="Convert CZK" />
         </AppSection>
       </AppContainer>
     </>

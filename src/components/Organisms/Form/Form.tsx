@@ -8,7 +8,6 @@ import {
 } from "./Form.styles";
 import { useQuery } from "@tanstack/react-query";
 import { getRates } from "../../../api/queries";
-import { TRate } from "../../../api/Rates";
 
 type TProps = {
   title: string;
@@ -31,15 +30,13 @@ export const Form = (props: TProps) => {
     if (!secondCurrency.length) return alert("choose currency");
     if (!data) return alert("connection error");
 
-    const conversionRule: TRate | undefined = data.data.find(
-      (item: TRate) => item.code === secondCurrency
-    );
+    const conversionRule = data.find((item) => item.code === secondCurrency);
     if (!conversionRule) return alert("unknown currency");
 
     let result =
       conversionRule.rate >= 1
-        ? amount / conversionRule.rate
-        : conversionRule.rate / amount;
+        ? (amount / conversionRule.rate) * conversionRule.amount
+        : (conversionRule.rate / amount) * conversionRule.amount;
 
     setConversionResult(result);
   };
@@ -79,7 +76,7 @@ export const Form = (props: TProps) => {
             value={secondCurrency}
           >
             <option value=""> - </option>
-            {data?.data.map((item: TRate) => (
+            {data?.map((item) => (
               <option key={item.code} value={item.code}>
                 {item.code}
               </option>
