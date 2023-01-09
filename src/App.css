@@ -5,3 +5,7 @@
   text-align: center;
   color: #232323;
 }
+
+::selection {
+  background: #8ce6e6;
+}

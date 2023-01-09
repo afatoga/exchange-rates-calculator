@@ -2,6 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { getRates } from "../../../api/queries";
 import {
   Title,
+  TableContainer,
   Table,
   TableLine,
   Cell,
@@ -25,32 +26,40 @@ export const Rates = () => {
       {error && "connection error"}
       {isLoading && "loading..."}
       {data?.length && (
-        <>
+        <TableContainer>
           <Table>
             <thead>
               <tr>
-                <HeadingCell>Country</HeadingCell>
-                <HeadingCell>Currency</HeadingCell>
-                <HeadingCell>Code</HeadingCell>
-                <HeadingCell align={"right"}>Amount</HeadingCell>
-                <HeadingCell align={"right"}>Rate</HeadingCell>
+                <HeadingCell width={"10%"}>Code</HeadingCell>
+                <HeadingCell mobileHidden={true} width={"16%"}>
+                  Currency
+                </HeadingCell>
+                <HeadingCell width={"20%"} mobileHidden={true}>
+                  Country
+                </HeadingCell>
+                <HeadingCell align={"right"} width={"10%"}>
+                  Amount
+                </HeadingCell>
+                <HeadingCell align={"right"} width={"16%"}>
+                  Rate
+                </HeadingCell>
               </tr>
             </thead>
             <tbody>
               {data.map((line: TRate) => {
                 return (
                   <TableLine key={line.code}>
-                    <Cell>{line.country}</Cell>
-                    <Cell>{line.currency}</Cell>
                     <Cell>{line.code}</Cell>
+                    <Cell mobileHidden={true}>{line.currency}</Cell>
+                    <Cell mobileHidden={true}>{line.country}</Cell>
                     <Cell align={"right"}>{line.amount}</Cell>
-                    <RateCell>{line.rate}</RateCell>
+                    <RateCell>{line.rate.toFixed(3)}</RateCell>
                   </TableLine>
                 );
               })}
             </tbody>
           </Table>
-        </>
+        </TableContainer>
       )}
     </>
   );

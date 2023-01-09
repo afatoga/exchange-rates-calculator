@@ -88,9 +88,9 @@ export const Form = (props: TProps) => {
       </form>
       {conversionResult && (
         <ResultMessage>
-          Amount of {`${amount}`} CZK is{" "}
+          Amount of {`${amount}`} CZK is <br />
           <ConversionResult>
-            {`${conversionResult.toFixed(4)}`} {`${secondCurrency}`}
+            {`${conversionResult.toFixed(3)}`} {`${secondCurrency}`}
           </ConversionResult>
         </ResultMessage>
       )}

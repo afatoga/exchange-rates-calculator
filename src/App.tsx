@@ -10,10 +10,10 @@ function App() {
   return (
     <>
       <AppContainer>
-        <AppSection>
+        <AppSection mobileOrder={1} flexGrow={1}>
           <Rates />
         </AppSection>
-        <AppSection flexGrow={1} paddingLeft={"20px"}>
+        <AppSection paddingLeft={"60px"} mobileOrder={0}>
           <Form title="Convert CZK" />
         </AppSection>
       </AppContainer>
